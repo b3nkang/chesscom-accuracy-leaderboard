@@ -105,7 +105,6 @@ app.get('/fetchAndStoreChessData', async (req, res) => {
           const accuracy_array = await scrape(username);
           chessData.recent_accuracy = accuracy_array;
           console.log(chessData);
-          // Store 'chessData' in MongoDB Atlas here.
           // await req.db.collection('chessPlayers').insertOne(chessData);
         }
       }
