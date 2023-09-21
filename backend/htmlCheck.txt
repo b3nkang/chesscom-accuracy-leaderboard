@@ -1,0 +1,174 @@
+<tr v-board-popover="{&quot;fen&quot;:&quot;4Q3\/p5pk\/1r5p\/1p2QR2\/2p3P1\/P1P4P\/1P1q3K\/8 w - -&quot;,&quot;flipBoard&quot;:&quot;false&quot;,&quot;highlightedSquares&quot;:&quot;d7d2&quot;}" data-board-popover="whd85em77n">
+
+        <td class="archive-games-icon-block">
+          <a class="archive-games-background-link" href="https://www.chess.com/game/live/89049836049?username=nihalsarin">
+          </a>
+
+          
+                  
+    
+  <span class="icon-font-chess archive-games-game-icon blitz"></span>
+
+
+          <span class="archive-games-game-time">
+                          3 min
+                      </span>
+        </td>
+
+        <td class="archive-games-user-cell">
+          <a class="archive-games-background-link" href="https://www.chess.com/game/live/89049836049?username=nihalsarin">
+          </a>
+
+          <div class="archive-games-user-wrapper">
+            <div class="archive-games-users">
+              
+              <div class="archive-games-user-tagline">
+                                
+                <span class="archive-games-color-play-icon archive-games-white archive-games-won"></span>
+
+                  
+    
+        
+  <div class="user-tagline-component archive-games-user-info ">
+          
+    
+    <a href="https://www.chess.com/members/titled-players" class="post-view-meta-title" v-tooltip="Grandmaster" data-tooltip-target="10">
+      GM
+    </a>
+  
+
+    <a v-user-popover="'nihalsarin'" class="user-username-component user-username-blue-with-dark-mode user-tagline-username" href="https://www.chess.com/member/nihalsarin">
+      nihalsarin
+    </a>
+
+          <span class="user-tagline-rating">(3149)</span>
+    
+                        
+                    
+      <div data-cy="user-country-flag" v-tooltip="Tajikistan" class="country-flags-component country-215
+          
+          " data-tooltip-target="11">
+      </div>
+      
+
+        
+              
+  
+  
+  
+        
+      
+          <a href="https://www.chess.com/settings#flair-modal" class="user-flair flair-link" aria-label="Show your flair!">
+        <span class="flair-component flair-diamond_traditional" v-tooltip="Show your flair!" data-tooltip-target="12">
+        </span>
+      </a>
+      
+  
+
+    
+      </div>
+
+              </div>
+
+              <div class="archive-games-user-tagline">
+                                
+                <span class="archive-games-color-play-icon archive-games-black "></span>
+
+                  
+    
+        
+  <div class="user-tagline-component archive-games-user-info ">
+          
+    
+    <a href="https://www.chess.com/members/titled-players" class="post-view-meta-title" v-tooltip="Grandmaster" data-tooltip-target="13">
+      GM
+    </a>
+  
+
+    <a v-user-popover="'Josh_2021'" class="user-username-component user-username-blue-with-dark-mode user-tagline-username" href="https://www.chess.com/member/josh_2021">
+      Josh_2021
+    </a>
+
+          <span class="user-tagline-rating">(3025)</span>
+    
+                        
+                    
+      <div data-cy="user-country-flag" v-tooltip="Germany" class="country-flags-component country-54
+          
+          " data-tooltip-target="14">
+      </div>
+      
+
+        
+              
+  
+  
+  
+        
+      
+          <a href="https://www.chess.com/settings#flair-modal" class="user-flair flair-link" aria-label="Show your flair!">
+        <span class="flair-component flair-fire" v-tooltip="Show your flair!" data-tooltip-target="15">
+        </span>
+      </a>
+      
+  
+
+    
+      </div>
+
+              </div>
+            </div>
+
+            <a href="https://www.chess.com/game/live/89049836049?username=nihalsarin" class="archive-games-link">
+                            </a>
+          </div>
+        </td>
+
+        <td>
+          <a class="archive-games-result-wrapper" href="https://www.chess.com/game/live/89049836049?username=nihalsarin">
+            <div class="archive-games-result-wrapper-score">
+              <div>1</div>
+
+              <div>0</div>
+            </div>
+
+            <div class="archive-games-result">
+                                          
+                                  
+  <span class="icon-font-chess archive-games-result-icon archive-games-result-won square-plus" v-tooltip="Won" data-tooltip-target="16"></span>
+
+              
+                          </div>
+          </a>
+        </td>
+
+        <td class="table-text-center archive-games-analyze-cell">
+          
+          <a class="archive-games-background-link" href="https://www.chess.com/analysis/game/live/89049836049">
+          </a>
+
+                      <div>80.6</div>
+
+            <div>69.8</div>
+                  </td>
+
+        <td class="table-text-center">
+          <a class="archive-games-background-link" href="https://www.chess.com/game/live/89049836049?username=nihalsarin">
+          </a>
+
+          <span>43</span>
+        </td>
+
+        <td class="table-text-right archive-games-date-cell">
+          <a class="archive-games-background-link" href="https://www.chess.com/game/live/89049836049?username=nihalsarin">
+          </a>
+
+          Sep 21, 2023
+        </td>
+
+                  <td class="table-text-center archive-games-checkbox-cell">
+                          <label class="cc-checkbox-component archive-games-select-game-label">
+                <input aria-label="Select the Game" id="89049836049" class="cc-checkbox-input archive-games-game-checkbox" data-game-id="89049836049" data-game-type="game_live" type="checkbox">
+              </label>
+                      </td>
+              </tr>
