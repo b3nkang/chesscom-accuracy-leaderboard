@@ -77,7 +77,7 @@ def compute_avg(accuracies):
 
 
 if __name__ == "__main__":
-    username = "magnuscarlsen"
+    username = "MagnusCarlsen"
     accuracies = scrape_accuracies(username)
     print(accuracies)
     print(compute_avg(accuracies))
