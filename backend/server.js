@@ -1,9 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const port = 3000
+const port = 8080
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://chess:<pw>@chesscomcluster0.kmzbxgj.mongodb.net/?retryWrites=true&w=majority'
+const uri = 'mongodb+srv://chess:chess@chesscomcluster0.kmzbxgj.mongodb.net/?retryWrites=true&w=majority'
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -16,8 +17,8 @@ const headers = {
 const cheerio = require('cheerio');
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
   
 async function scrapeAccuracies(user) {
   const url = `https://www.chess.com/games/archive/${user}`;
@@ -74,47 +75,78 @@ async function scrape(chesscomUser) {
   }
 }
 
-
+app.use(cors());
 app.use(async (req, res, next) => {
-    try {
-      await client.connect();
-      req.dbClient = client;
-      req.db = client.db('ChesscomCluster0'); 
-      next();
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Error connecting to MongoDB Atlas');
-    }
-  });
+  try {
+    await client.connect();
+    req.dbClient = client;
+    req.db = client.db('ChesscomCluster0'); 
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error connecting to MongoDB Atlas');
+  }
+});
   
 app.get('/', (req, res) => {
-    res.send('Hello, World!');
-  });
+  res.send('Hello, World!');
+});
   
 app.get('/fetchAndStoreChessData', async (req, res) => {
-    try {
-      const usernames = ['MagnusCarlsen', 'FabianoCaruana', 'Hikaru', 'Chefshouse', 'Firouzja2003', 'lachesisQ', 'AnishGiri', 'GMWSO', 'nihalsarin', 'Danielnaroditsky']//, 'Polish_fighter3000', 'HansOnTwitch', 'VladimirKramnik', 'Grischuk', 'fairchess_on_youtube']; 
-  
-      for (const username of usernames) {
-        const apiUrl = `https://api.chess.com/pub/player/${username}`;
-        sleep(2000);
-        const response = await fetch(apiUrl); 
-  
-        if (response.status === 200) {
-          const chessData = await response.json();
-          const accuracy_array = await scrape(username);
-          chessData.recent_accuracy = accuracy_array;
-          console.log(chessData);
-          // await req.db.collection('chessPlayers').insertOne(chessData);
-        }
+  try {
+    const usernames = ['MagnusCarlsen', 'FabianoCaruana', 'Hikaru', 'Chefshouse', 'Firouzja2003', 'lachesisQ', 'VladimirKramnik', 'GMWSO', 'nihalsarin', 'HansOnTwitch']//, 'Polish_fighter3000', 'Danielnaroditsky', 'AnishGiri', 'Grischuk', 'fairchess_on_youtube']; 
+
+    for (const username of usernames) {
+      const apiUrl = `https://api.chess.com/pub/player/${username}`;
+      const apiUrl2 = `https://api.chess.com/pub/player/${username}/stats`;
+
+      sleep(2000);
+      const response = await fetch(apiUrl); 
+      const response2 = await fetch(apiUrl2); 
+
+      let chessData2 = {};
+      if (response2.status === 200) {
+        chessData2 = await response2.json();
+        // await req.db.collection('chessPlayers').insertOne(chessData);
       }
-  
-      res.status(201).json({ message: 'Data fetched and stored successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error fetching and storing data' });
+
+      if (response.status === 200) {
+        const chessData = await response.json();
+        const accuracy_array = await scrape(username);
+        chessData.recent_accuracy = accuracy_array;
+        chessData.chess_bullet = chessData2.chess_bullet;
+        chessData.chess_blitz = chessData2.chess_blitz;
+        chessData.chess_rapid = chessData2.chess_rapid;
+        // chessData.fide = chessData2.fide;
+        console.log(chessData);
+        await req.db.collection('chessPlayers').insertOne(chessData);
+      }
     }
-  });
+
+    res.status(201).json({ message: 'Data fetched and stored successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching and storing data' });
+  }
+});
+  
+app.get('/getChessPlayers', async (req, res) => {
+  try {
+    const chessPlayersCollection = req.db.collection('chessPlayers'); // Get the MongoDB collection
+
+    // Fetch all documents in the collection (you can add a query to filter data)
+    const chessPlayers = await chessPlayersCollection.find({}).toArray();
+    console.log('Fetched Chess Players:', chessPlayers);
+
+    res.setHeader('Content-Type', 'application/json');
+
+    // Send the JSON response
+    res.status(200).json(chessPlayers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching and sending data' });
+  }
+});
   
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
