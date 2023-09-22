@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Optional: Center vertically within the viewport */
+}
 
 .data-table {
   background-color: #333;

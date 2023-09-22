@@ -13,6 +13,7 @@ function Table({ data }) {
           {[...Array(10)].map((_, index) => (
             <th key={index}>{index + 1}</th>
           ))}
+          <th>Avg Accuracy</th> {}
           <th>Blitz</th>
           <th>Rapid</th>
           <th>Bullet</th>
@@ -30,6 +31,7 @@ function Table({ data }) {
             {item.recent_accuracy.map((accuracy, i) => (
               <td key={i}>{accuracy}</td>
             ))}
+            <td>{item.average_accuracy}</td> {/* Avg Accuracy */}
             <td>{item.chess_blitz?.last?.rating || 'N/A'}</td> {/* Blitz */}
             <td>{item.chess_rapid?.last?.rating || 'N/A'}</td> {/* Rapid */}
             <td>{item.chess_bullet?.last?.rating || 'N/A'}</td> {/* Bullet */}
