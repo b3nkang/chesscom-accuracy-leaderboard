@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 8080
+const port = 3000
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://chess:chess@chesscomcluster0.kmzbxgj.mongodb.net/?retryWrites=true&w=majority'
+const uri = 'mongodb+srv://chess:pwd@chesscomcluster0.kmzbxgj.mongodb.net/?retryWrites=true&w=majority'
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -60,10 +60,10 @@ async function scrapeAccuracies(user) {
   }
 }
 
-/*function computeAvg(accuracies) {
+function computeAvg(accuracies) {
   const sum = accuracies.reduce((acc, value) => acc + (value || 0), 0);
   return accuracies.length > 0 ? sum / accuracies.length : 0;
-}*/
+}
 
 async function scrape(chesscomUser) {
   const userr = chesscomUser;
@@ -113,13 +113,16 @@ app.get('/fetchAndStoreChessData', async (req, res) => {
       if (response.status === 200) {
         const chessData = await response.json();
         const accuracy_array = await scrape(username);
+        const avgAccuracy = computeAvg(accuracy_array);
+
         chessData.recent_accuracy = accuracy_array;
+        chessData.average_accuracy = avgAccuracy;
         chessData.chess_bullet = chessData2.chess_bullet;
         chessData.chess_blitz = chessData2.chess_blitz;
         chessData.chess_rapid = chessData2.chess_rapid;
         // chessData.fide = chessData2.fide;
         console.log(chessData);
-        await req.db.collection('chessPlayers').insertOne(chessData);
+        //await req.db.collection('chessPlayers').insertOne(chessData);
       }
     }
 

@@ -45,10 +45,10 @@ async function scrapeAccuracies(username) {
   }
 }
 
-/*function computeAvg(accuracies) {
+function computeAvg(accuracies) {
   const sum = accuracies.reduce((acc, value) => acc + (value || 0), 0);
   return accuracies.length > 0 ? sum / accuracies.length : 0;
-}*/
+}
 
 async function main() {
   const username = 'MagnusCarlsen';
