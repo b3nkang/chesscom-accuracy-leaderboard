@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Table from './Table';
-import '../index.css';
 
 function DarkThemePage() {
   const [tableData, setTableData] = useState([]);
