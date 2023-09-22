@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Table from './Table';
+import InfoSection from './InfoSection';
+
 
 function DarkThemePage() {
   const [tableData, setTableData] = useState([]);
@@ -20,6 +22,7 @@ function DarkThemePage() {
   return (
     <div className="dark-theme-page">
       <h1>Chess.com Selected Accuracy Leaderboard</h1>
+      <InfoSection /> {}
       <Table data={tableData} />
     </div>
   );
