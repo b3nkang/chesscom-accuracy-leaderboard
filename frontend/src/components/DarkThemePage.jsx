@@ -13,7 +13,7 @@ function DarkThemePage() {
   };
 
   useEffect(() => {
-    const apiUrl = 'https://34.150.249.22:8080/getChessPlayers';
+    const apiUrl = 'http://localhost:8080/getChessPlayers';
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
