@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 3000
+const port = 8080
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://chess:pwd@chesscomcluster0.kmzbxgj.mongodb.net/?retryWrites=true&w=majority'
+const uri = 'mongodb+srv://chess:chess@chesscomcluster0.kmzbxgj.mongodb.net/?retryWrites=true&w=majority'
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -62,7 +62,8 @@ async function scrapeAccuracies(user) {
 
 function computeAvg(accuracies) {
   const sum = accuracies.reduce((acc, value) => acc + (value || 0), 0);
-  return accuracies.length > 0 ? sum / accuracies.length : 0;
+  const average = accuracies.length > 0 ? sum / accuracies.length : 0;
+  return parseFloat(average.toFixed(2));
 }
 
 async function scrape(chesscomUser) {
@@ -107,7 +108,6 @@ app.get('/fetchAndStoreChessData', async (req, res) => {
       let chessData2 = {};
       if (response2.status === 200) {
         chessData2 = await response2.json();
-        // await req.db.collection('chessPlayers').insertOne(chessData);
       }
 
       if (response.status === 200) {
@@ -122,7 +122,7 @@ app.get('/fetchAndStoreChessData', async (req, res) => {
         chessData.chess_rapid = chessData2.chess_rapid;
         // chessData.fide = chessData2.fide;
         console.log(chessData);
-        //await req.db.collection('chessPlayers').insertOne(chessData);
+        await req.db.collection('chessPlayers').insertOne(chessData);
       }
     }
 
@@ -135,15 +135,13 @@ app.get('/fetchAndStoreChessData', async (req, res) => {
   
 app.get('/getChessPlayers', async (req, res) => {
   try {
-    const chessPlayersCollection = req.db.collection('chessPlayers'); // Get the MongoDB collection
+    const chessPlayersCollection = req.db.collection('chessPlayers'); 
 
-    // Fetch all documents in the collection (you can add a query to filter data)
     const chessPlayers = await chessPlayersCollection.find({}).toArray();
     console.log('Fetched Chess Players:', chessPlayers);
 
     res.setHeader('Content-Type', 'application/json');
 
-    // Send the JSON response
     res.status(200).json(chessPlayers);
   } catch (error) {
     console.error(error);
