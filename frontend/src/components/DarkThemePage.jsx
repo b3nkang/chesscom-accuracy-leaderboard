@@ -5,6 +5,12 @@ import InfoSection from './InfoSection';
 
 function DarkThemePage() {
   const [tableData, setTableData] = useState([]);
+  const [isInfoVisible, setIsInfoVisible] = useState(false);
+
+  // eslint-disable-next-line
+  const toggleInfo = () => {
+    setIsInfoVisible(!isInfoVisible);
+  };
 
   useEffect(() => {
     const apiUrl = 'http://localhost:8080/getChessPlayers';
@@ -21,8 +27,9 @@ function DarkThemePage() {
 
   return (
     <div className="dark-theme-page">
+      {/* */}
+      <InfoSection isInfoVisible={isInfoVisible} />
       <h1>Chess.com Selected Accuracy Leaderboard</h1>
-      <InfoSection /> {}
       <Table data={tableData} />
     </div>
   );
